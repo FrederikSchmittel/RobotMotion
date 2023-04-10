@@ -45,11 +45,13 @@ class MotionModel:
 
     def __init__(self, world_size: int, initial_position: tuple[int, int], num_actions: int) -> None:
         """
-        Initialize the robot localization problem with the given world size, initial position, and number of actions.
+        Initialize the robot localization problem with the 
+        given world size, initial position, and number of actions.
 
         Args:
             world_size (int): The size of the 2D square grid world.
-            initial_position (tuple): The initial position of the robot in the form (x, y).
+            initial_position (tuple): The initial position 
+            of the robot in the form (x, y).
             num_actions (int): The number of actions the robot can take.
 
         Returns:
@@ -65,18 +67,26 @@ class MotionModel:
     def motion_model(self, action: np.ndarray) -> None:
 
         """
-        Calculates the new belief state of the agent after taking a given action, based on a motion model.
+        Calculates the new belief state of the agent after 
+        taking a given action, based on a motion model.
 
         The motion model is defined as follows:
-        - With a probability of CORRECT_DIRECTION_PROBABILITY, the agent moves in the correct direction specified by the action.
-        - With a probability of NO_MOVEMENT_PROBABILITY, the agent does not move at all.
-        - With a probability of OPPOSITE_DIRECTION_PROBABILITY, the agent moves in the opposite direction specified by the action.
+        - With a probability of CORRECT_DIRECTION_PROBABILITY, 
+        the agent moves in the correct direction specified by the action.
+        - With a probability of NO_MOVEMENT_PROBABILITY, 
+        the agent does not move at all.
+        - With a probability of OPPOSITE_DIRECTION_PROBABILITY, 
+        the agent moves in the opposite direction specified by the action.
 
         Args:
-            action: A NumPy array of shape (,2) representing the direction of movement. The first element specifies the change in the x direction, and the second element specifies the change in the y direction.
+            action: A NumPy array of shape (,2) representing 
+            the direction of movement. The first element specifies 
+            the change in the x direction, and the second element 
+            specifies the change in the y direction.
 
         Returns:
-            None. The new belief state is stored in the `belief` attribute of the `MotionModel` instance.
+            None. The new belief state is stored in the `belief` 
+            attribute of the `MotionModel` instance.
         """
 
         new_belief: np.ndarray = np.zeros([self.world_size,self.world_size])
@@ -107,12 +117,19 @@ class MotionModel:
         """
         Plots the belief matrix as an image and a 3D surface plot.
 
-        Displays the belief matrix as a 2D image and a 3D surface plot in separate subplots of a single figure.
-        The belief matrix is assumed to be a 2D numpy array where each element represents a probability value.
-        The first subplot shows the belief matrix as a 2D image using a "hot" colormap and no axis labels.
-        The second subplot displays the belief matrix as a 3D surface plot with the x and y coordinates of each
-        probability value obtained from the indices of the belief matrix, and the z coordinate corresponding to
-        the probability value itself. The surface plot is colored using a "viridis" colormap and has x, y, and z axis labels.
+        Displays the belief matrix as a 2D image and a 3D surface 
+        plot in separate subplots of a single figure.
+        The belief matrix is assumed to be a 2D numpy array 
+        where each element represents a probability value.
+        The first subplot shows the belief matrix as a 2D 
+        image using a "hot" colormap and no axis labels.
+        The second subplot displays the belief matrix as a 
+        3D surface plot with the x and y coordinates of each
+        probability value obtained from the indices of the 
+        belief matrix, and the z coordinate corresponding to
+        the probability value itself. The surface plot is 
+        colored using a "viridis" colormap and has x, y, 
+        and z axis labels.
 
         Args:
             None
@@ -143,13 +160,17 @@ class MotionModel:
 
     def random_actions(self, number_of_actions: int) -> np.ndarray:
         """
-        Generates n random vectors with values of -1, 0, or 1 for both dimensions.
+        Generates n random vectors with values of -1, 0, or 1 for 
+        both dimensions.
         
         Args:
-            n: An integer specifying the number of random vectors to generate.
+            n: An integer specifying the number of random vectors to 
+            generate.
         
         Returns:
-            A NumPy array of shape (n, 2) representing a collection of random vectors with x and y components which defines the direction of movement.
+            A NumPy array of shape (n, 2) representing a collection 
+            of random vectors with x and y components which defines the 
+            direction of movement.
         """
         # Initialize an empty NumPy array to store the random vectors
         random_actions = np.empty([number_of_actions, 2])
@@ -173,10 +194,14 @@ class MotionModel:
     
     def run_motion_model(self) -> np.ndarray:
         """
-        Applies the motion model to update the belief state for each action in the list of actions, and plots the final belief state.
+        Applies the motion model to update the belief state 
+        for each action in the list of actions, and plots the 
+        final belief state.
         
         Returns:
-            A NumPy array of shape (n, m) representing the final belief state, where n is the number of rows and m is the number of columns in the environment.
+            A NumPy array of shape (n, m) representing the 
+            final belief state, where n is the number of 
+            rows and m is the number of columns in the environment.
         """
 
         for i in range(self.num_actions):
