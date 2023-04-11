@@ -213,6 +213,5 @@ if __name__ == '__main__':
     world_size = 30
     initial_position = [10, 14]
     num_actions = 500
-    i = 0
     model = MotionModel(world_size, initial_position, num_actions)
     model.run_motion_model()
