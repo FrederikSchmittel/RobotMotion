@@ -6,11 +6,11 @@ The given code defines a class MotionModel that implements a robot localization
 problem in a 2D discrete grid world. The robot can move forward (F), 
 backward (B), upwards(U) and downside(D) based on a given command. The motion model 
 for the robot is defined with three variable probabilities:
-CORRECT_DIRECTION_PROBABILITY: 95% chance that the robot moves in the correct 
+CORRECT_DIRECTION_PROBABILITY: 50% chance that the robot moves in the correct 
 direction (i.e. F moves the robot forward and B moves the robot backward).
-NO_MOVEMENT_PROBABILITY: 2.5% chance that the robot does not move or 
+NO_MOVEMENT_PROBABILITY: 10% chance that the robot does not move or 
 cannot execute the command.
-OPPOSITE_DIRECTION_PROBABILITY: 2.5% chance that the robot moves in the 
+OPPOSITE_DIRECTION_PROBABILITY: 40% chance that the robot moves in the 
 opposite direction (i.e. F moves the robot backward and B moves the robot forward).
 
 The class takes in the world size, initial position of the robot, and the number of 
@@ -35,13 +35,13 @@ The imshow and plot_surface methods of the Matplotlib library are used to plot t
 class MotionModel:
 
     # The probability that the robot moves in the correct direction according to the action taken.
-    CORRECT_DIRECTION_PROBABILITY: float = 0.95
+    CORRECT_DIRECTION_PROBABILITY: float = 0.5
 
     # The probability that the robot does not move and stays in its current position.
-    NO_MOVEMENT_PROBABILITY: float = 0.025
+    NO_MOVEMENT_PROBABILITY: float = 0.1
 
     # The probability that the robot moves in the opposite direction of the intended action.
-    OPPOSITE_DIRECTION_PROBABILITY: float = 0.025
+    OPPOSITE_DIRECTION_PROBABILITY: float = 0.4
 
     def __init__(self, world_size: int, initial_position: tuple[int, int], num_actions: int) -> None:
         """
@@ -138,7 +138,7 @@ class MotionModel:
             None
         """
 
-        fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 4))
+        fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 6))
         
         # Plot the belief matrix as an image
         ax1.imshow(self.belief, cmap='hot', interpolation='nearest')
@@ -188,7 +188,7 @@ class MotionModel:
             # Store the generated vector in the array
             random_actions[i, 0] = rand_x
             random_actions[i, 1] = rand_y
-        
+
         # Return the array of random vectors
         return random_actions
     
@@ -207,12 +207,12 @@ class MotionModel:
         for i in range(self.num_actions):
             self.motion_model(self.actions[i])
         self.plot_belief()
-        return self.belief
+        
 
 if __name__ == '__main__':
-    world_size = 5
-    initial_position = [1, 4]
-    num_actions = 10
+    world_size = 30
+    initial_position = [10, 14]
+    num_actions = 500
     i = 0
     model = MotionModel(world_size, initial_position, num_actions)
     model.run_motion_model()
