@@ -1,7 +1,6 @@
 import numpy as np
 from noise import pnoise2
 
-
 class World:
     """
     A class representing a world generated with Perlin noise.
