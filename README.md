@@ -4,7 +4,7 @@ The given code defines a class MotionModel that implements a robot localization 
 # Goals
 Create a custom simulation environment for robotic algorithms with quick setup time.
 ## TODOs:
-- [ ] World 
+- [x] World 
 - [ ] Agent
 - [ ] Mapping
 - [ ] Observation
